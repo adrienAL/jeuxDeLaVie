@@ -16,10 +16,13 @@ public class Carre {
 	// Attributs
 	private int x, y;
 	private Color couleur;
+	private int coordonneeX, coordonneeY;
 
 	// Constructeur
 	public Carre(int x, int y, Color couleur) {
 		super();
+		this.coordonneeX = x;
+		this.coordonneeY = y;
 		this.x = ((x + 1) * BRIQUE_V_ESPACE) + (x * LARGEUR);
 		this.y = ((y + 1) * BRIQUE_H_ESPACE) + (y * HAUTEUR);
 		this.couleur = couleur;

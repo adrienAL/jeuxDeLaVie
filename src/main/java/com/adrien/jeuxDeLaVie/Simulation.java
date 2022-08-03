@@ -20,8 +20,14 @@ public class Simulation extends JPanel {
 	public Simulation() {
 		for (int i = 0; i < NUM_CARRE_COLONNES; i++) {
 			for (int j = 0; j < NUM_CARRE_LIGNES; j++) {
-				if ((i == 51 && j == 50) || (i == 52 && j == 51) || (i == 52 && j == 52) || (i == 51 && j == 52)
-						|| (i == 50 && j == 52)) {
+//				if ((i == 22 && j == 22) || (i == 22 && j == 21) || (i == 21 && j == 23) || (i == 20 && j == 23)
+//						|| (i == 22 && j == 20)) {
+//					this.carres.add(new Carre(i, j, Color.black));
+//				} else {
+//					this.carres.add(new Carre(i, j, Color.white));
+//				}
+				if ((i == 22 && j == 22) || (i == 22 && j == 21) || (i == 21 && j == 23) || (i == 20 && j == 23)
+						|| (i == 22 && j == 20)) {
 					this.carres.add(new Carre(i, j, Color.black));
 				} else {
 					this.carres.add(new Carre(i, j, Color.white));
@@ -33,7 +39,7 @@ public class Simulation extends JPanel {
 	}
 
 	public void regleDeVie() {
-		timer = new Timer(1000, new ActionListener() {
+		timer = new Timer(50, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nouvelle liste de carres
 				ArrayList<Carre> newCarres = new ArrayList<Carre>();
@@ -43,6 +49,7 @@ public class Simulation extends JPanel {
 						try {
 							int index = (j) + NUM_CARRE_COLONNES * i;
 							c = carres.get(index);
+							Carre newCarre = new Carre(i, j, c.getCouleur());
 							if (c.getCouleur() == Color.black) {
 								// test mort
 								// une cellule vivante possédant deux ou trois
@@ -62,7 +69,7 @@ public class Simulation extends JPanel {
 									}
 								}
 								if (nbrVoisin != 2 && nbrVoisin != 3) {
-									c.setCouleur(Color.white);
+									newCarre.setCouleur(Color.white);
 								}
 							} else {
 
@@ -83,16 +90,18 @@ public class Simulation extends JPanel {
 									}
 								}
 								if (nbrVoisin == 3) {
-									c.setCouleur(Color.black);
+									newCarre.setCouleur(Color.black);
 								}
 							}
-							newCarres.add(c);
+							newCarres.add(newCarre);
 						} catch (Exception e2) {
 
 						}
 					}
 				}
-				carres = newCarres;
+				carres = null;
+				carres = new ArrayList<Carre>();
+				carres.addAll(newCarres);
 				repaint();
 			}
 
