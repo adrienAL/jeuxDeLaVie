@@ -3,7 +3,7 @@ package com.adrien.jeuxDeLaVie;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Carre {
+public class Cellule {
 
 	// dimention des briques
 	public static final int HAUTEUR = 10;
@@ -19,7 +19,7 @@ public class Carre {
 	private int coordonneeX, coordonneeY;
 
 	// Constructeur
-	public Carre(int x, int y, Color couleur) {
+	public Cellule(int x, int y, Color couleur) {
 		super();
 		this.coordonneeX = x;
 		this.coordonneeY = y;
