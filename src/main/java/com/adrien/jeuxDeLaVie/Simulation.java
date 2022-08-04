@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -12,13 +13,15 @@ public class Simulation extends JPanel {
 	public final static int NUM_CELLULE_COLONNES = 500;// (int) (Frame.LARGEUR / cellule.LARGEUR);
 	public final static int NUM_CELLULE_LIGNES = 500;// (int) (Frame.HAUTEUR / cellule.HAUTEUR);
 
-	private TableCoordonnee<Cellule> cellules = new TableCoordonnee<Cellule>(NUM_CELLULE_COLONNES);
+	private TableCoordonnee cellules = new TableCoordonnee(NUM_CELLULE_COLONNES);
 	private Timer timer;
 	private int position = 0;
 
 	public Simulation() {
 		this.positionsDeDepart();
 		this.regleDeVie();
+
+		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
 	public Simulation(int position) {
@@ -31,20 +34,21 @@ public class Simulation extends JPanel {
 	private void positionsDeDepart() {
 		for (int i = 0; i < NUM_CELLULE_COLONNES; i++) {
 			for (int j = 0; j < NUM_CELLULE_LIGNES; j++) {
-//				if ((i == 22 && j == 22) || (i == 22 && j == 21) || 
-//				(i == 21 && j == 23) || (i == 20 && j == 23)
-//						|| (i == 22 && j == 20)) {
-//					this.cellules.add(new Cellule(i, j, Color.black));
-//				} else {
-//					this.cellules.add(new Cellule(i, j, Color.white));
-//				}
-				if ((i == 22 && j == 22) || (i == 22 && j == 21) || (i == 21 && j == 23) || (i == 20 && j == 23)
-						|| (i == 22 && j == 20)) {
-					this.cellules.add(new Cellule(i, j, Color.black));
-				} else {
-					this.cellules.add(new Cellule(i, j, Color.white));
-				}
+				this.cellules.add(new Cellule(i, j, Color.white));
 			}
+		}
+		switch (position) {
+		case 0:
+			Cellule cellule = new Cellule(0, 0, Color.black);
+			this.cellules.setCoordonnee(22, 22, cellule);
+			this.cellules.setCoordonnee(22, 21, cellule);
+			this.cellules.setCoordonnee(21, 23, cellule);
+			this.cellules.setCoordonnee(20, 23, cellule);
+			this.cellules.setCoordonnee(22, 20, cellule);
+			break;
+
+		default:
+			break;
 		}
 
 	}
@@ -53,7 +57,7 @@ public class Simulation extends JPanel {
 		timer = new Timer(50, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nouvelle liste de cellules
-				TableCoordonnee<Cellule> newCellules = new TableCoordonnee<Cellule>(NUM_CELLULE_COLONNES);
+				TableCoordonnee newCellules = new TableCoordonnee(NUM_CELLULE_COLONNES);
 				for (int i = 0; i < NUM_CELLULE_COLONNES; i++) {
 					for (int j = 0; j < NUM_CELLULE_LIGNES; j++) {
 						Cellule c = null;
@@ -95,7 +99,7 @@ public class Simulation extends JPanel {
 					}
 				}
 				cellules = null;
-				cellules = new TableCoordonnee<Cellule>(NUM_CELLULE_COLONNES);
+				cellules = new TableCoordonnee(NUM_CELLULE_COLONNES);
 				cellules.addAll(newCellules);
 				repaint();
 			}
