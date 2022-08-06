@@ -2,7 +2,7 @@ package com.adrien.jeuxDeLaVie;
 
 import java.util.ArrayList;
 
-public class TableCoordonnee extends ArrayList<Cellule> {
+public class TableCoordonnee extends ArrayList<Object> {
 	private int NUM_CELLULE_COLONNES;
 
 	public TableCoordonnee(int NUM_CELLULE_COLONNES) {
@@ -10,13 +10,13 @@ public class TableCoordonnee extends ArrayList<Cellule> {
 		this.NUM_CELLULE_COLONNES = NUM_CELLULE_COLONNES;
 	}
 
-	public Cellule getCoordonnee(int x, int y) {
-		int c = x + NUM_CELLULE_COLONNES * y;
+	public Object getCoordonnee(int x, int y) {
+		int c = y + NUM_CELLULE_COLONNES * x;
 		return this.get(c);
 	}
 
 	public void setCoordonnee(int x, int y, Cellule cellule) {
-		int c = x + NUM_CELLULE_COLONNES * y;
+		int c = y + NUM_CELLULE_COLONNES * x;
 		cellule.setX(x);
 		cellule.setY(y);
 		this.set(c, cellule);

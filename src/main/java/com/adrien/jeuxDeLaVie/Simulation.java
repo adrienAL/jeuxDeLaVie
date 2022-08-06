@@ -29,6 +29,8 @@ public class Simulation extends JPanel {
 		this.positionsDeDepart();
 		this.regleDeVie();
 
+		setBorder(BorderFactory.createLineBorder(Color.black));
+
 	}
 
 	private void positionsDeDepart() {
@@ -37,14 +39,22 @@ public class Simulation extends JPanel {
 				this.cellules.add(new Cellule(i, j, Color.white));
 			}
 		}
+
+		Cellule cellule = new Cellule(0, 0, Color.black);
 		switch (position) {
 		case 0:
-			Cellule cellule = new Cellule(0, 0, Color.black);
 			this.cellules.setCoordonnee(22, 22, cellule);
 			this.cellules.setCoordonnee(22, 21, cellule);
 			this.cellules.setCoordonnee(21, 23, cellule);
 			this.cellules.setCoordonnee(20, 23, cellule);
 			this.cellules.setCoordonnee(22, 20, cellule);
+			break;
+		case 1:
+			this.cellules.setCoordonnee(21, 20, cellule);
+			this.cellules.setCoordonnee(22, 21, cellule);
+			this.cellules.setCoordonnee(22, 22, cellule);
+			this.cellules.setCoordonnee(21, 22, cellule);
+			this.cellules.setCoordonnee(20, 22, cellule);
 			break;
 
 		default:
@@ -62,22 +72,20 @@ public class Simulation extends JPanel {
 					for (int j = 0; j < NUM_CELLULE_LIGNES; j++) {
 						Cellule c = null;
 						try {
-							int index = (j) + NUM_CELLULE_COLONNES * i;
-							c = cellules.get(index);
+							c = (Cellule) cellules.getCoordonnee(i, j);
 							Cellule newCellule = new Cellule(i, j, c.getCouleur());
 
 							int nbrVoisin = 0;
 							for (int ii = -1; ii <= 1; ii++) {
 								for (int jj = -1; jj <= 1; jj++) {
-
-									int indexVoisin = ((j + jj)) + NUM_CELLULE_COLONNES * (i + ii);
-									if (indexVoisin >= 0 && indexVoisin < cellules.size()) {
-										Cellule cVoisin = cellules.get(indexVoisin);
+									try {
+										Cellule cVoisin = (Cellule) cellules.getCoordonnee(i + ii, j + jj);
 										if ((ii != 0 || jj != 0) && cVoisin.getCouleur() == Color.black) {
 											nbrVoisin++;
 										}
+									} catch (Exception e3) {
+										// TODO: handle exception
 									}
-
 								}
 							}
 							// test mort
@@ -109,9 +117,9 @@ public class Simulation extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		g.clearRect(0, 0, 850, 2000); // efface en repaint tout en blanc
+		g.clearRect(0, 0, 850, 1500); // efface en repaint tout en blanc
 		for (int i = 0; i < cellules.size(); i++) {
-			cellules.get(i).draw(g);
+			((Cellule) cellules.get(i)).draw(g);
 		}
 	}
 

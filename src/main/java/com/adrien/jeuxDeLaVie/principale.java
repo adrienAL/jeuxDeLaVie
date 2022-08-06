@@ -1,10 +1,10 @@
 package com.adrien.jeuxDeLaVie;
 
-public class principale {
+public class Principale {
 
 	public static void main(String[] args) {
-		Frame frame = new Frame();
-		frame.setVisible(true);
+		Menu menu = new Menu();
+		menu.setVisible(true);
 
 	}
 
