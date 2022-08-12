@@ -15,31 +15,22 @@ public class Simulation extends JPanel {
 
 	private TableCoordonnee cellules = new TableCoordonnee(NUM_CELLULE_COLONNES);
 	private Timer timer;
-	private int position = 0;
 
 	public Simulation() {
-		this.positionsDeDepart();
-		this.regleDeVie();
+		this.initGrille();
 
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
-	public Simulation(int position) {
-		this.position = position;
-		this.positionsDeDepart();
-		this.regleDeVie();
-
-		setBorder(BorderFactory.createLineBorder(Color.black));
-
-	}
-
-	private void positionsDeDepart() {
+	private void initGrille() {
 		for (int i = 0; i < NUM_CELLULE_COLONNES; i++) {
 			for (int j = 0; j < NUM_CELLULE_LIGNES; j++) {
 				this.cellules.add(new Cellule(i, j, Color.white));
 			}
 		}
+	}
 
+	public void setPositionDepart(int position) {
 		Cellule cellule = new Cellule(0, 0, Color.black);
 		switch (position) {
 		case 0:
@@ -60,10 +51,9 @@ public class Simulation extends JPanel {
 		default:
 			break;
 		}
-
 	}
 
-	public void regleDeVie() {
+	public void start() {
 		timer = new Timer(50, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nouvelle liste de cellules
@@ -123,8 +113,12 @@ public class Simulation extends JPanel {
 		}
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
+	public TableCoordonnee getCellules() {
+		return cellules;
+	}
+
+	public void setCellules(TableCoordonnee cellules) {
+		this.cellules = cellules;
 	}
 
 }

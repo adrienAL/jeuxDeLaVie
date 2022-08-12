@@ -1,7 +1,6 @@
 package com.adrien.jeuxDeLaVie;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import javax.swing.JButton;
 
@@ -18,15 +17,19 @@ public class CelluleButton {
 	private int x, y;
 	private Color couleur;
 	private int coordonneeX, coordonneeY;
+	private JButton button;
 
 	// Constructeur
 	public CelluleButton(int x, int y, Color couleur) {
 		super();
 		this.coordonneeX = x;
 		this.coordonneeY = y;
-		this.x = ((x + 1) * BRIQUE_V_ESPACE) + (x * LARGEUR);
-		this.y = ((y + 1) * BRIQUE_H_ESPACE) + (y * HAUTEUR);
+		this.x = ((x + 1) * BRIQUE_V_ESPACE) + (x * LARGEUR) + 200;
+		this.y = ((y + 1) * BRIQUE_H_ESPACE) + (y * HAUTEUR) + 100;
 		this.couleur = couleur;
+		this.button = new JButton();
+		this.button.setBackground(couleur);
+		this.button.setBounds(this.x, this.y, LARGEUR, HAUTEUR);
 	}
 
 	// toString pour vérification
@@ -43,14 +46,6 @@ public class CelluleButton {
 		return builder.toString();
 	}
 
-	// Méthode
-	public JButton draw(Graphics g) {
-		JButton button = new JButton();
-		button.setBackground(couleur);
-		button.setBounds(this.x, this.y, LARGEUR, HAUTEUR);
-		return button;
-	}
-
 	// Setteur et getteur
 	public Color getCouleur() {
 		return couleur;
@@ -58,6 +53,7 @@ public class CelluleButton {
 
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
+		this.button.setBackground(couleur);
 	}
 
 	public int getX() {
@@ -74,5 +70,14 @@ public class CelluleButton {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public JButton getButton() {
+		return button;
+	}
+
+	public void setButton(JButton b) {
+		this.button = b;
+
 	}
 }

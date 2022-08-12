@@ -10,7 +10,7 @@ public class Frame extends JFrame {
 	public static final int POSITION_X = 0;
 	public static final int POSITION_Y = 0;
 
-	public Frame(int numSimu) {
+	public Frame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocation(POSITION_X, POSITION_Y);
 		setSize(LARGEUR, HAUTEUR);
@@ -18,9 +18,31 @@ public class Frame extends JFrame {
 		setName(getName());
 		setBackground(Color.white);
 
-		Simulation jeuxDeLaVie = new Simulation(numSimu);
-		add(jeuxDeLaVie);
+	}
 
+	public void addSimu(int numSimu) {
+		Simulation jeuxDeLaVie = new Simulation();
+		jeuxDeLaVie.setPositionDepart(numSimu);
+		jeuxDeLaVie.start();
+		add(jeuxDeLaVie);
+	}
+
+	public void addSimu(TableCoordonnee cellules) {
+
+		Cellule cellule = new Cellule(0, 0, Color.black);
+		Simulation jeuxDeLaVie = new Simulation();
+		TableCoordonnee grille = jeuxDeLaVie.getCellules();
+		for (int i = 0; i < cellules.size(); i++) {
+			CelluleButton CB = (CelluleButton) cellules.get(i);
+			if (CB.getCouleur() == Color.black) {
+				grille.setCoordonnee(CB.getX(), CB.getY(), cellule);
+			}
+		}
+		jeuxDeLaVie.setCellules(grille);
+		System.out.println(jeuxDeLaVie);
+
+		jeuxDeLaVie.start();
+		add(jeuxDeLaVie);
 	}
 
 }

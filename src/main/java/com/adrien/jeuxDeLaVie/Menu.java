@@ -41,10 +41,12 @@ public class Menu extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == planeur) {
-			Frame frame = new Frame(1);
+			Frame frame = new Frame();
+			frame.addSimu(1);
 			frame.setVisible(true);
 		} else if (e.getSource() == L) {
-			Frame frame = new Frame(0);
+			Frame frame = new Frame();
+			frame.addSimu(0);
 			frame.setVisible(true);
 		} else if (e.getSource() == autre) {
 			Editeur editeur = new Editeur();
