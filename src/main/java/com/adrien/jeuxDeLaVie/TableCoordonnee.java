@@ -20,5 +20,7 @@ public class TableCoordonnee extends ArrayList<Object> {
 		cellule.setX(x);
 		cellule.setY(y);
 		this.set(c, cellule);
+		System.out.println("TableauCoordonnée " + c);
+		System.out.println("coordonnée x :" + x + " y : " + y);
 	}
 }

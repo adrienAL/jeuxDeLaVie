@@ -32,12 +32,16 @@ public class Cellule {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Brique [x=");
+		builder.append("Cellule [x=");
 		builder.append(x);
 		builder.append(", y=");
 		builder.append(y);
 		builder.append(", couleur=");
 		builder.append(couleur);
+		builder.append(", coordonneeX =");
+		builder.append(coordonneeX);
+		builder.append(", coordonneeY =");
+		builder.append(coordonneeY);
 		builder.append("]");
 		return builder.toString();
 	}

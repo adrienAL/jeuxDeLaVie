@@ -34,15 +34,23 @@ public class Frame extends JFrame {
 		TableCoordonnee grille = jeuxDeLaVie.getCellules();
 		for (int i = 0; i < cellules.size(); i++) {
 			CelluleButton CB = (CelluleButton) cellules.get(i);
+			System.out.println(grille.getCoordonnee(CB.getX() - 201, CB.getY() - 101));
 			if (CB.getCouleur() == Color.black) {
-				grille.setCoordonnee(CB.getX(), CB.getY(), cellule);
+				grille.setCoordonnee(CB.getX() - 201, CB.getY() - 101, cellule);
+				System.out.println("black : " + grille.getCoordonnee(CB.getX() - 201, CB.getY() - 101));
 			}
 		}
 		jeuxDeLaVie.setCellules(grille);
-		System.out.println(jeuxDeLaVie);
 
 		jeuxDeLaVie.start();
 		add(jeuxDeLaVie);
+
+		for (int i = 0; i < jeuxDeLaVie.getCellules().size(); i++) {
+			Cellule CB = (Cellule) jeuxDeLaVie.getCellules().get(i);
+			if (CB.getCouleur() == Color.black) {
+				System.out.println(CB);
+			}
+		}
 	}
 
 }

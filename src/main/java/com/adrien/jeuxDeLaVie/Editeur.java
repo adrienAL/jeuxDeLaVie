@@ -59,7 +59,6 @@ public class Editeur extends JFrame implements ActionListener {
 			Color c = cellule.getBackground();
 			if (c == Color.white) {
 				c = Color.black;
-
 			} else {
 				c = Color.white;
 			}
